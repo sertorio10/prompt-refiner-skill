@@ -1,63 +1,105 @@
-name: prompt-refiner
-description: Refina y mejora un prompt escrito por el usuario, de forma explícita y solo cuando se solicita. Activar cuando el usuario use frases como "refiná este prompt", "mejorá este prompt", "refine this prompt", "/refine", "quiero mejorar este prompt", "optimizá este prompt", o cuando pegue un prompt y pida que lo mejore. NO activar para cualquier consulta genérica — solo cuando hay una intención clara de mejorar un prompt específico.
+# 🔧 prompt-refiner — Claude Cowork Skill
+
+> **Turns vague prompts into precise, structured ones — automatically.**  
+> **Convierte prompts vagos en instrucciones precisas y estructuradas — automáticamente.**
+
 ---
 
-# Prompt Refiner
+## English
 
-## Objetivo
+### What it does
 
-Tomar un prompt escrito por el usuario y devolver una versión mejorada, sin ejecutarlo. El output es el prompt refinado, listo para ser copiado y usado.
+`prompt-refiner` is a skill for [Claude Cowork](https://claude.ai) that takes any prompt you write and returns an improved version — without executing it. The output is a refined, ready-to-copy prompt.
 
-## Cuándo activar
+It only activates when you explicitly ask for it, so it never gets in the way of your normal workflow.
 
-Solo cuando el usuario lo pide explícitamente. Señales claras:
-- "refiná este prompt"
-- "mejorá este prompt"
-- "/refine [prompt]"
-- "quiero mejorar este prompt"
-- "optimizá este prompt"
-- pega un prompt y pide explícitamente que lo mejore
+### Before / After
 
-## Proceso de refinamiento
+**Before:**
+> "explain machine learning"
 
-Analizá el prompt original aplicando todas estas dimensiones:
+**After:**
+```
+Explain what machine learning is clearly and without unnecessary technical jargon.
+Include: (1) a one-sentence definition, (2) how it works conceptually using an everyday analogy,
+(3) three real, concrete use cases.
+Length: maximum 300 words. Language: English.
+```
 
-### 1. Claridad de objetivo
-- ¿Qué quiere lograr el usuario con este prompt?
-- ¿El objetivo está explícito o implícito?
-- Si está implícito, hacerlo explícito en el prompt refinado.
+### How to install
 
-### 2. Contexto
-- ¿Falta información de fondo que el modelo necesitaría para responder bien?
-- Agregar rol, dominio, situación o restricciones relevantes cuando aplique.
+1. Download this repo as a ZIP
+2. Rename the ZIP file to `prompt-refiner.skill`
+3. Drag it into Claude Cowork
 
-### 3. Instrucciones precisas
-- ¿Las instrucciones son ambiguas o genéricas?
-- Reemplazar términos vagos ("analiza", "explica") con instrucciones concretas y accionables.
+### How to use
 
-### 4. Formato de output esperado
-- ¿El usuario especificó cómo quiere la respuesta? (lista, tabla, párrafo, longitud, idioma)
-- Si no lo especificó, inferirlo del contexto y agregarlo.
+Trigger it with phrases like:
+- `refine this prompt: [your prompt]`
+- `improve this prompt`
+- `/refine [your prompt]`
 
-### 5. Detección de ambigüedades
-- Identificar palabras o frases que pueden interpretarse de más de una forma.
-- Resolverlas explícitamente en el prompt refinado.
+### What it improves
 
-### 6. Completitud
-- ¿Falta algún dato clave que el modelo necesitaría para responder? (fechas, nombres, cantidades, fuentes)
-- Si falta algo que el usuario podría proveer, señalarlo como un `[COMPLETAR: ...]` dentro del prompt refinado.
+| Dimension | What it checks |
+|---|---|
+| **Objective clarity** | Is the goal explicit or implicit? |
+| **Context** | Is background info missing? |
+| **Precise instructions** | Are there vague terms like "explain" or "analyze"? |
+| **Output format** | Length, language, structure specified? |
+| **Ambiguities** | Can any phrase be interpreted multiple ways? |
+| **Completeness** | Are key details missing? Marks them as `[FILL IN: ...]` |
 
-## Formato de output
+---
 
-Devolver **solo** el prompt refinado, dentro de un bloque de código para facilitar la copia. 
+## Español
 
-Después del bloque, agregar una sección breve titulada **Cambios aplicados** con bullets concisos explicando qué se modificó y por qué. Máximo 6 bullets.
+### Qué hace
 
-Si el prompt original ya es muy bueno y los cambios son menores, indicarlo.
+`prompt-refiner` es un skill para [Claude Cowork](https://claude.ai) que toma cualquier prompt que escribas y devuelve una versión mejorada — sin ejecutarlo. El output es el prompt refinado, listo para copiar y usar.
 
-## Ejemplo
+Solo se activa cuando lo pedís explícitamente, así no interfiere con tu flujo normal de trabajo.
 
-**Input del usuario:**
-> refiná este prompt: "explicame machine learning"
+### Antes / Después
 
-**Output:**
+**Antes:**
+> "explicame machine learning"
+
+**Después:**
+```
+Explicá qué es machine learning de forma clara y sin jerga técnica innecesaria.
+Incluí: (1) una definición en una oración, (2) cómo funciona a nivel conceptual usando
+una analogía cotidiana, (3) tres casos de uso reales y concretos.
+Extensión: máximo 300 palabras. Idioma: español.
+```
+
+### Cómo instalar
+
+1. Descargá este repo como ZIP
+2. Renombrá el archivo ZIP a `prompt-refiner.skill`
+3. Arrastralo a Claude Cowork
+
+### Cómo usar
+
+Activalo con frases como:
+- `refiná este prompt: [tu prompt]`
+- `mejorá este prompt`
+- `/refine [tu prompt]`
+
+### Qué mejora
+
+| Dimensión | Qué revisa |
+|---|---|
+| **Claridad de objetivo** | ¿El objetivo está explícito o implícito? |
+| **Contexto** | ¿Falta información de fondo? |
+| **Instrucciones precisas** | ¿Hay términos vagos como "explicá" o "analizá"? |
+| **Formato de output** | ¿Especificó longitud, idioma, estructura? |
+| **Ambigüedades** | ¿Alguna frase se puede interpretar de más de una forma? |
+| **Completitud** | ¿Faltan datos clave? Los marca como `[COMPLETAR: ...]` |
+
+---
+
+## License / Licencia
+
+MIT — free to use, share, and modify.  
+MIT — libre para usar, compartir y modificar.
